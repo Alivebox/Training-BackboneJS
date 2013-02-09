@@ -1,10 +1,6 @@
-/**
- * Here we create a simple view
- */
-
 (function($){
 
-    var ListView = Backbone.View.extend({
+    var SimpleView = Backbone.View.extend({
 
         el: $('body'),
 
@@ -14,11 +10,12 @@
         },
 
         render: function(){
-            $(this.el).append("<ul><li>Example 1</li></ul>");
+            debugger;
+            $(this.el).append("<label>Example 1</label>");
         }
 
     });
 
-    var listView = new ListView();
+    var simpleView = new SimpleView();
 
 })(jQuery)
