@@ -1,18 +1,23 @@
 define(
     [
         'jquery',
-        'underscore',
-        'backbone',
-        'core/router',
-        'views/bottommenubar/BottomMenuBarView'
+        'core/RouterManager',
+        'views/bottommenubar/BottomMenuBarView',
+        'jqueryMobile'
     ],
-    function ($, _, Backbone, Router, BottomMenuBarView) {
+    function ($, RouterManager, BottomMenuBarView) {
         return {
 
-            init: function(){
-                Router.init();
-                var tmpBottomMenuBarView = new BottomMenuBarView();
-                tmpBottomMenuBarView.render();
+            init:function () {
+                this.disableJQueryMobileRouting();
+                RouterManager.init();
+            },
+
+            disableJQueryMobileRouting:function () {
+                $.mobile.ajaxEnabled = false;
+                $.mobile.linkBindingEnabled = false;
+                $.mobile.hashListeningEnabled = false;
+                $.mobile.pushStateEnabled = false;
             }
 
         };

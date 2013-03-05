@@ -1,11 +1,10 @@
 define(
     [
         'jquery',
-        'underscore',
         'backbone',
         'text!views/mywishlist/template/myWishlistTemplate.html'
     ],
-    function ($, _, Backbone, argMyWishlistTemplate) {
+    function ($, Backbone, argMyWishlistTemplate) {
 
         var MyWishListView = Backbone.View.extend({
 

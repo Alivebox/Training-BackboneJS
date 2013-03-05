@@ -1,11 +1,10 @@
 define(
     [
         'jquery',
-        'underscore',
         'backbone',
         'text!views/bottommenubar/template/bottomMenuBarTemplate.html'
     ],
-    function ($, _, Backbone, argBottomMenuBarTemplate) {
+    function ($, Backbone, argBottomMenuBarTemplate) {
 
         var BottomMenuBarView = Backbone.View.extend({
 

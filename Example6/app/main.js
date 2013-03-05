@@ -3,7 +3,8 @@ require.config(
 
         paths:{
             jquery:'../resources/js/jquery',
-            underscore:'../resources/js/underscore',
+            jqueryMobile:'../resources/js/jquery.mobile',
+            underscore:'../resources/js/lodash',
             backbone:'../resources/js/backbone'
         },
 
@@ -11,9 +12,6 @@ require.config(
             'backbone': {
                 deps: ['underscore','jquery'],
                 exports: 'Backbone'
-            },
-            'underscore': {
-                exports: '_'
             }
         }
 
@@ -24,7 +22,8 @@ require(
     [
         'app'
     ],
-    function (argApp) {
-        argApp.init();
+    function(Application){
+        Application.init();
     }
 );
+
