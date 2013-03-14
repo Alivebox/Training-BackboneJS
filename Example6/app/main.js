@@ -4,6 +4,7 @@ require.config(
         paths:{
             jquery:'../resources/js/jquery',
             jqueryMobile:'../resources/js/jquery.mobile',
+            jqueryMobileConfig: '../resources/js/jqm-config',
             underscore:'../resources/js/lodash',
             backbone:'../resources/js/backbone'
         },
@@ -20,7 +21,8 @@ require.config(
 
 require(
     [
-        'app'
+        'app',
+        'jqueryMobileConfig'
     ],
     function(Application){
         Application.init();

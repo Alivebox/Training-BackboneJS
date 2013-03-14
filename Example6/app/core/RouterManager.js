@@ -2,9 +2,11 @@ define(
     [
         'backbone',
         'views/mymovies/MyMoviesView',
-        'views/mywishlist/MyWishlistView'
+        'views/mywishlist/MyWishlistView',
+        'jquery',
+        'underscore'
     ],
-    function (Backbone, MyMoviesView, MyWishlistView) {
+    function (Backbone, MyMoviesView, MyWishlistView, $, _) {
 
         var AppRouter = Backbone.Router.extend({
             routes:{
@@ -17,6 +19,7 @@ define(
         return {
 
             firstPage: true,
+            currentPage: undefined,
 
             init:function () {
                 var tmpAppRouter = new AppRouter();
@@ -32,21 +35,13 @@ define(
 
             showMyWishlist: function(){
                 var tmpMyWishlistView = new MyWishlistView();
-                tmpMyWishlistView.render();
+                this.showPage(tmpMyWishlistView);
             },
 
             showPage: function(argPage){
-                $(argPage.el).attr('data-role', 'page');
-                argPage.render();
-                $('body').append($(argPage.el));
-                var tmpTransition = $.mobile.defaultPageTransition;
-                if (this.firstPage) {
-                    tmpTransition = 'none';
-                    this.firstPage = false;
-                }
-                $.mobile.changePage($(argPage.el), {
-                    changeHash:false,
-                    transition: tmpTransition
+                this.currentPage = argPage;
+                $.mobile.changePage($(this.currentPage.el), {
+                    changeHash:false
                 });
             }
 
