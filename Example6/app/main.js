@@ -6,13 +6,17 @@ require.config(
             jqueryMobile:'../resources/js/jquery.mobile',
             jqueryMobileConfig: '../resources/js/jqm-config',
             underscore:'../resources/js/lodash',
-            backbone:'../resources/js/backbone'
+            backbone:'../resources/js/backbone',
+            handlebars: '../resources/js/handlebars'
         },
 
         shim: {
             'backbone': {
                 deps: ['underscore','jquery'],
                 exports: 'Backbone'
+            },
+            'handlebars': {
+                exports: 'Handlebars'
             }
         }
 
@@ -22,10 +26,13 @@ require.config(
 require(
     [
         'app',
-        'jqueryMobileConfig'
+        'jqueryMobileConfig',
+        'backbone',
+        'handlebars'
     ],
     function(Application){
         Application.init();
+        this.testing = true;
     }
 );
 

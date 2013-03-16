@@ -2,9 +2,10 @@ define(
     [
         'jquery',
         'backbone',
-        'text!views/mymovies/template/myMoviesTemplate.html'
+        'handlebars',
+        'templates/compiled/myMoviesTemplate'
     ],
-    function ($, Backbone, argMyMoviesTemplate) {
+    function ($, Backbone, Handlebars) {
 
         var MyMoviesView = Backbone.View.extend({
 
@@ -15,7 +16,10 @@ define(
             },
 
             render:function () {
-                $(this.el).html(argMyMoviesTemplate);
+                var tmpTemplate = Handlebars.templates['myMoviesTemplate.html']({
+                    description: 'My Movies are going to be here!! Yeah!!!'
+                });
+                $(this.el).html(tmpTemplate);
                 $(this.el).on('pagebeforeshow', $.proxy(this.onPageBeforeShow,this));
                 $(this.el).on('pagebeforehide', $.proxy(this.onPageBeforeHide,this));
                 return this;

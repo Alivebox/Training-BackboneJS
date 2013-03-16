@@ -2,9 +2,10 @@ define(
     [
         'jquery',
         'backbone',
-        'text!views/mywishlist/template/myWishlistTemplate.html'
+        'handlebars',
+        'templates/compiled/myWishlistTemplate'
     ],
-    function ($, Backbone, argMyWishlistTemplate) {
+    function ($, Backbone, Handlebars) {
 
         var MyWishListView = Backbone.View.extend({
 
@@ -15,7 +16,10 @@ define(
             },
 
             render:function () {
-                $(this.el).html(argMyWishlistTemplate);
+                var tmpTemplate = Handlebars.templates['myWishlistTemplate.html']({
+                    description: 'My Wishlist is going to be here!! Yeah!!!'
+                });
+                $(this.el).html(tmpTemplate);
                 $(this.el).on('pagebeforeshow', $.proxy(this.onPageBeforeShow,this));
                 $(this.el).on('pagebeforehide', $.proxy(this.onPageBeforeHide,this));
                 return this;

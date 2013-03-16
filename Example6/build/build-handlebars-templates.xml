@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<project name="handlebarsBuild" default="main">
+
+    <macrodef name="handlebars">
+        <attribute name="inputFile"/>
+        <attribute name="outputFile"/>
+        <sequential>
+            <echo message="Precompiling handlebars template: @{inputFile}. Output: @{outputFile}"/>
+            <exec executable="C:\Users\Juan Carlos\AppData\Roaming\npm\handlebars.cmd">
+                <arg value="@{inputFile}"/>
+                <arg value="-f@{outputFile}"/>
+            </exec>
+        </sequential>
+    </macrodef>
+
+    <taskdef resource="net/sf/antcontrib/antlib.xml"/>
+
+    <property name="templatesFolder" value="../app/templates"/>
+    <property name="compiledTemplatesFolder" value="../app/templates/compiled/"/>
+
+    <target name="makeTempCopyOfModifedTemplates">
+        <copy todir=".">
+            <fileset dir="${templatesFolder}">
+                <modified/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="compile" depends="makeTempCopyOfModifedTemplates">
+
+        <foreach target="precompileHandlebars" param="filePath">
+            <path>
+                <fileset dir=".">
+                    <include name="*.html"/>
+                </fileset>
+            </path>
+        </foreach>
+
+    </target>
+
+    <target name="precompileHandlebars">
+        <basename property="fileName" file="${filePath}" suffix=".html" />
+        <handlebars inputFile="${fileName}.html" outputFile="${compiledTemplatesFolder}${fileName}.js" />
+    </target>
+
+    <target name="removeTempCopiesOfModifiedTemplates" >
+        <delete>
+            <fileset dir="." includes="*.html" />
+        </delete>
+    </target>
+
+    <target name="main" depends="compile,removeTempCopiesOfModifiedTemplates"/>
+
+</project>
